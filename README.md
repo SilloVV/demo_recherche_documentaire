@@ -2,7 +2,7 @@
 Ceci est une démo pour un projet de recherche de documents pdf,word,pptx.
 
 ## La Stratégie est la suivante :
-- Extraire des résumés à partir de chaque document (PDF ou PowerPoint) :
+- Extraire des résumés à partir de chaque document (PDF ou Word) :
 - Extraire des mots-clés de chaque résumé (ou du PDF d'origine, si pertinent) :
 - Générer un embedding pour chaque liste de mots clés de chaque résumé 
 - Calculer la similarité entre tous les vecteurs des résumés :
