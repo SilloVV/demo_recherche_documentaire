@@ -48,25 +48,22 @@ Ceci est une démo pour un projet de recherche de documents pdf,word,pptx.
 Mesure la fréquence d'un mot dans un document donné. Plus un mot apparaît fréquemment dans un document, plus sa valeur TF est élevée. 
 
 Formule :  
-\[
-TF = \frac{\text{Nombre d'occurrences du mot dans le document}}{\text{Nombre total de mots dans le document}}
-\]
+TF = (Nombre d'occurrences du mot dans le document) / (Nombre total de mots dans le document)
+
 
 ### 2. **IDF (Inverse Document Frequency) :** 
 Mesure l'importance d'un mot dans l'ensemble des documents. Plus un mot apparaît dans un grand nombre de documents, moins il est considéré comme pertinent.
 
 Formule :  
-\[
-IDF = \log \left( \frac{\text{Nombre total de documents}}{\text{Nombre de documents contenant ce mot}} \right)
-\]
+IDF = log( (Nombre total de documents) / (Nombre de documents contenant ce mot) )
+
 
 ### 3. **TF-IDF :** 
 Le score final pour chaque mot est calculé en multipliant sa valeur TF et IDF :
 
 Formule :  
-\[
-\text{TF-IDF} = TF \times IDF
-\]
+TF-IDF = TF * IDF
+
 
 ### Résumé :
 Un mot avec une fréquence élevée dans un document mais rare dans l'ensemble des documents aura un score TF-IDF élevé, ce qui signifie qu'il est important pour ce document.
