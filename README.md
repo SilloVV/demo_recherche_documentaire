@@ -47,6 +47,7 @@ Ceci est une démo pour un projet de recherche de documents pdf,word,pptx.
 ### 1. **TF (Term Frequency) :** 
 Mesure la fréquence d'un mot dans un document donné. Plus un mot apparaît fréquemment dans un document, plus sa valeur TF est élevée. 
 
+Formule :  
 \[
 TF = \frac{\text{Nombre d'occurrences du mot dans le document}}{\text{Nombre total de mots dans le document}}
 \]
@@ -54,6 +55,7 @@ TF = \frac{\text{Nombre d'occurrences du mot dans le document}}{\text{Nombre tot
 ### 2. **IDF (Inverse Document Frequency) :** 
 Mesure l'importance d'un mot dans l'ensemble des documents. Plus un mot apparaît dans un grand nombre de documents, moins il est considéré comme pertinent.
 
+Formule :  
 \[
 IDF = \log \left( \frac{\text{Nombre total de documents}}{\text{Nombre de documents contenant ce mot}} \right)
 \]
@@ -61,6 +63,7 @@ IDF = \log \left( \frac{\text{Nombre total de documents}}{\text{Nombre de docume
 ### 3. **TF-IDF :** 
 Le score final pour chaque mot est calculé en multipliant sa valeur TF et IDF :
 
+Formule :  
 \[
 \text{TF-IDF} = TF \times IDF
 \]
@@ -83,5 +86,3 @@ Le fichier **`extract_most_important_words.py`** utilise **TF-IDF** pour extrair
    ```python
    vectorizer = TfidfVectorizer(stop_words=stop_words_fr)
    X = vectorizer.fit_transform(summaries)
-
-
