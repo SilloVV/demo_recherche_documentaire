@@ -1,57 +1,48 @@
-from transformers import BartTokenizer, BartForConditionalGeneration
-import torch
+from transformers import pipeline
 from pdf_text_extractor import PDF_Text_Extractor
 
-class TextSummarizer1:
-    def __init__(self, model_name="facebook/bart-large-cnn"):
+class Bart_Summarizer:
+    def __init__(self, model_name="facebook/bart-large-cnn", max_chunk_size=800):
         """
         Initialise le résumeur avec un modèle BART pré-entraîné.
-        :param model_name: Nom du modèle BART à utiliser (par défaut "facebook/bart-large-cnn").
+        :param model_name: Nom du modèle BART à utiliser (par défaut "facebook/bart-base").
+        :param max_chunk_size: Taille maximale des morceaux de texte à résumer.
         """
-        self.model_name = model_name
-        self.tokenizer = BartTokenizer.from_pretrained(model_name)
-        self.model = BartForConditionalGeneration.from_pretrained(model_name)
+        self.summarizer = pipeline("summarization", model=model_name)
+        self.max_chunk_size = max_chunk_size
 
-    def summarize(self, text, max_length=130, min_length=30):
+    def summarize(self, text, max_length=130, min_length=40):
         """
         Génère un résumé pour le texte donné en utilisant BART.
         :param text: Texte à résumer.
         :param max_length: Longueur maximale du résumé.
         :param min_length: Longueur minimale du résumé.
-        :return: Résumé du texte.
+        :return: Résumé final du texte.
         """
-        # si c'est une liste (plus d'une page), joindre les textes pour avoir un string
-        if isinstance(text, list):
-            text = ' '.join(text)
-            
-        #Debug
-        #print(text)
+        # Diviser le texte en morceaux plus petits
+        chunks = [text[i:i + self.max_chunk_size] for i in range(0, len(text), self.max_chunk_size)]
         
-        # Tokenizer le texte
-        inputs = self.tokenizer.encode("summarize: " + text, return_tensors="pt", max_length=1024, truncation=True)
+        # Résumer chaque morceau de texte
+        summaries = []
+        for chunk in chunks:
+            summary = self.summarizer(chunk, max_length=max_length, min_length=min_length, do_sample=False)
+            summaries.append(summary[0]['summary_text'])
         
-        # Générer le résumé
-        summary_ids = self.model.generate(inputs, max_length=max_length, min_length=min_length, length_penalty=2.0, num_beams=4, early_stopping=True)
-        summary = self.tokenizer.decode(summary_ids[0], skip_special_tokens=True)
-        
-        return summary
+        # Combiner les résumés de chaque morceau
+        final_summary = ' '.join(summaries)
+        return final_summary
 
+# Exemple d'utilisation
+if __name__ == "__main__":
+    chemin = "test.pdf"
+    preprocessor = PDF_Text_Extractor(chemin)
+    texte = preprocessor.extract_text()
 
-# Exemple d'utilisation avec un fichier pdf
+    # Supprime les retours à la ligne successifs et remplace les doubles espaces par des simples
+    texte = ' '.join(texte).replace('\n\n', ' ').replace('  ', ' ')
 
-'''chemin = "test.pdf"
-preprocessor = PDF_Text_Extractor(chemin)
-texte = preprocessor.extract_text()
-
-summarizer = TextSummarizer()
-
-# Supprime les retours à la ligne successifs et remplace les doubles espaces par des simples
-texte = ' '.join(texte).replace('\n\n', ' ').replace('  ', ' ')
-
-# Augmenter la taille du résumé
-max_length = 300  # longueur maximale du résumé (en tokens)
-min_length = 100  # longueur minimale du résumé (en tokens)
-
-resume = summarizer.summarize(texte, max_length=max_length, min_length=min_length)
-print("Résumé: ")
-print(resume)'''
+    summarizer = Bart_Summarizer()
+    final_summary = summarizer.summarize(texte)
+    final_summary = final_summary.replace('\n\n', ' ').replace('  ', ' ')
+    print("Résumé: ")
+    print(final_summary)

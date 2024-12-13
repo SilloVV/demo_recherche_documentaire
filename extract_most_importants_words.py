@@ -2,8 +2,8 @@ import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
 from docx_text_extractor import DOCX_Text_Extractor
 from pdf_text_extractor import PDF_Text_Extractor
-from bert_summarizer import TextSummarizer
-from bart_summarizer import TextSummarizer1
+from bert_summarizer import BertSummarizer
+from bart_summarizer import Bart_Summarizer
 
 # Télécharger les stop words en français via nltk
 nltk.download('stopwords')
@@ -27,10 +27,10 @@ text1 = preprocessor_1.extract_text()
 summaries = []
 
 # Initialiser le résumeur BERT
-summarizer = TextSummarizer()
+summarizer = BertSummarizer()
 
 # Initialiser le résumeur BART
-summarizer1 = TextSummarizer1()
+summarizer1 = Bart_Summarizer()
 
 
 # Générer un résumé pour le texte donné
@@ -41,7 +41,6 @@ print(resume)
 resume1 = summarizer1.summarize(text1, max_length=300, min_length=100)
 print("Résumé Bart: ")
 print(resume1)
-
 
 
 # Ajouter le résumé à la liste summaries

@@ -2,7 +2,7 @@ from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 from pdf_text_extractor import PDF_Text_Extractor
 
-class TextSummarizer:
+class BertSummarizer:
     def __init__(self, model_name="bert-base-uncased"):
         """
         Initialise le résumeur avec un modèle BERT pré-entraîné.
