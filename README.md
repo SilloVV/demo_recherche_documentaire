@@ -38,5 +38,50 @@ Ceci est une démo pour un projet de recherche de documents pdf,word,pptx.
 - **BART-Base / BART-Large** : BART est disponible en versions **Base** et **Large**, où **Large** offre une meilleure performance pour des résumés abstratifs, mais nécessite plus de ressources.
 
 
+# Extraction de Mots-Clés avec TF-IDF
+
+## Qu'est-ce que TF-IDF ?
+
+**TF-IDF** (Term Frequency - Inverse Document Frequency) est une méthode d'analyse de texte utilisée pour évaluer l'importance d'un mot dans un document, en tenant compte de sa fréquence dans le document et dans l'ensemble du corpus. Elle est particulièrement utile pour extraire des mots-clés d'un texte.
+
+### 1. **TF (Term Frequency) :** 
+Mesure la fréquence d'un mot dans un document donné. Plus un mot apparaît fréquemment dans un document, plus sa valeur TF est élevée. 
+
+\[
+TF = \frac{\text{Nombre d'occurrences du mot dans le document}}{\text{Nombre total de mots dans le document}}
+\]
+
+### 2. **IDF (Inverse Document Frequency) :** 
+Mesure l'importance d'un mot dans l'ensemble des documents. Plus un mot apparaît dans un grand nombre de documents, moins il est considéré comme pertinent.
+
+\[
+IDF = \log \left( \frac{\text{Nombre total de documents}}{\text{Nombre de documents contenant ce mot}} \right)
+\]
+
+### 3. **TF-IDF :** 
+Le score final pour chaque mot est calculé en multipliant sa valeur TF et IDF :
+
+\[
+\text{TF-IDF} = TF \times IDF
+\]
+
+### Résumé :
+Un mot avec une fréquence élevée dans un document mais rare dans l'ensemble des documents aura un score TF-IDF élevé, ce qui signifie qu'il est important pour ce document.
+
+---
+
+## Utilisation de TF-IDF dans le fichier `extract_most_important_words.py`
+
+Le fichier **`extract_most_important_words.py`** utilise **TF-IDF** pour extraire les mots-clés les plus importants de plusieurs résumés. Voici le fonctionnement du script :
+
+1. **Prétraitement des données :**
+   Le script commence par charger une série de résumés sous forme de texte dans une liste Python.
+
+2. **Vectorisation avec `TfidfVectorizer` :**
+   Le texte est ensuite transformé en une matrice de scores TF-IDF à l'aide de `TfidfVectorizer` de la bibliothèque `scikit-learn`.
+
+   ```python
+   vectorizer = TfidfVectorizer(stop_words=stop_words_fr)
+   X = vectorizer.fit_transform(summaries)
 
 
