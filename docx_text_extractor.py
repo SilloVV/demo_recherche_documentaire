@@ -34,8 +34,7 @@ class DOCX_Text_Extractor:
 
 
 # Exemple d'utilisation avec un fichier DOCX
-
-chemin = "test.docx"
-preprocessor = DOCX_Text_Extractor(chemin)
-paragraphs_sentences = preprocessor.extract_text()
-print(paragraphs_sentences)
+#chemin = "test.docx"
+#preprocessor = DOCX_Text_Extractor(chemin)
+#paragraphs_sentences = preprocessor.extract_text()
+#print(paragraphs_sentences)

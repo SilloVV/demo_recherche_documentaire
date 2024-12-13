@@ -54,7 +54,7 @@ class TextSummarizer:
 
 # Exemple d'utilisation avec un fichier pdf
 
-chemin = "test.pdf"
+chemin = "test.docx"
 preprocessor = PDF_Text_Extractor(chemin)
 texte = preprocessor.extract_text()
 

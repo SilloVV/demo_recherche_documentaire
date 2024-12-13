@@ -39,7 +39,7 @@ class PDF_Text_Extractor:
 
     
 
-#chemin= "LOM - Mesures clés.pdf"
+#chemin= "test.pdf"
 #preprocessor = PDF_Text_Extractor(chemin)
 #text = preprocessor.extract_text()
 #print(text)
