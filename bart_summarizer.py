@@ -2,7 +2,7 @@ from transformers import BartTokenizer, BartForConditionalGeneration
 import torch
 from pdf_text_extractor import PDF_Text_Extractor
 
-class TextSummarizer:
+class TextSummarizer1:
     def __init__(self, model_name="facebook/bart-large-cnn"):
         """
         Initialise le résumeur avec un modèle BART pré-entraîné.
@@ -39,7 +39,7 @@ class TextSummarizer:
 
 # Exemple d'utilisation avec un fichier pdf
 
-chemin = "test.pdf"
+'''chemin = "test.pdf"
 preprocessor = PDF_Text_Extractor(chemin)
 texte = preprocessor.extract_text()
 
@@ -54,4 +54,4 @@ min_length = 100  # longueur minimale du résumé (en tokens)
 
 resume = summarizer.summarize(texte, max_length=max_length, min_length=min_length)
 print("Résumé: ")
-print(resume)
+print(resume)'''

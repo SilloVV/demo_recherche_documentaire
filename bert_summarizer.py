@@ -54,7 +54,7 @@ class TextSummarizer:
 
 # Exemple d'utilisation avec un fichier pdf
 
-chemin = "test.docx"
+'''chemin = "test.docx"
 preprocessor = PDF_Text_Extractor(chemin)
 texte = preprocessor.extract_text()
 
@@ -69,4 +69,4 @@ min_length = 20   # longueur minimale du résumé (en tokens)
 
 resume = summarizer.summarize(texte, max_length=max_length, min_length=min_length)
 print("Résumé:")
-print(resume)
+print(resume)'''
