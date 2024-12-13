@@ -27,18 +27,18 @@ text1 = preprocessor_1.extract_text()
 summaries = []
 
 # Initialiser le résumeur BERT
-summarizer = BertSummarizer()
+bert_summarizer = BertSummarizer()
 
 # Initialiser le résumeur BART
-summarizer1 = Bart_Summarizer()
+bart_summarizer = Bart_Summarizer()
 
 
 # Générer un résumé pour le texte donné
-resume = summarizer.summarize(text, max_length=80, min_length=20)
+resume = bert_summarizer.summarize(text, max_length=80, min_length=20)
 print("Résumé Bert: ")
 print(resume)
 
-resume1 = summarizer1.summarize(text1, max_length=300, min_length=100)
+resume1 = bart_summarizer.summarize(text1, max_length=300, min_length=100)
 print("Résumé Bart: ")
 print(resume1)
 
